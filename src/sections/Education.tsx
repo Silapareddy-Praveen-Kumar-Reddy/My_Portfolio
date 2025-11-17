@@ -30,11 +30,12 @@ const Education = () => {
                   {educationTimeline.map((item, idx) => (
                     <Card
                       key={item.title}
-                      className="relative p-6 bg-card/60 border border-white/5 backdrop-blur animate-fade-in"
+                      className="group relative overflow-hidden p-6 bg-card/60 border border-white/5 backdrop-blur animate-fade-in transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card"
                       style={{ animationDelay: `${idx * 0.1}s` }}
                     >
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       <div className="absolute -left-3 top-8 w-4 h-4 rounded-full border-4 border-background bg-primary shadow-lg" />
-                      <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="relative flex items-center justify-between gap-4 mb-4">
                         <div>
                           <h4 className="text-xl font-bold">{item.title}</h4>
                           <p className="text-primary font-semibold">{item.institution}</p>
@@ -44,7 +45,7 @@ const Education = () => {
                           {item.score}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                      <p className="relative text-sm text-muted-foreground">{item.description}</p>
                     </Card>
                   ))}
                 </div>
@@ -64,11 +65,12 @@ const Education = () => {
                   {experiences.map((exp, idx) => (
                     <Card
                       key={`${exp.company}-${exp.date}`}
-                      className="relative p-6 bg-card/60 border border-white/5 backdrop-blur animate-fade-in"
+                      className="group relative overflow-hidden p-6 bg-card/60 border border-white/5 backdrop-blur animate-fade-in transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card"
                       style={{ animationDelay: `${idx * 0.1}s` }}
                     >
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       <div className="absolute -left-3 top-8 w-4 h-4 rounded-full border-4 border-background bg-primary shadow-lg" />
-                      <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="relative flex items-center justify-between gap-4 mb-4">
                         <div>
                           <h4 className="text-xl font-bold">{exp.role}</h4>
                           <p className="text-primary font-semibold">{exp.company}</p>
@@ -78,7 +80,7 @@ const Education = () => {
                           <Briefcase className="w-5 h-5 text-primary-foreground" />
                         </div>
                       </div>
-                      <ul className="space-y-2 text-sm text-muted-foreground">
+                      <ul className="relative space-y-2 text-sm text-muted-foreground">
                         {exp.duties.map((duty, dutyIdx) => (
                           <li key={dutyIdx} className="flex gap-2">
                             <span className="text-accent">•</span>

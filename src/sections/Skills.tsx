@@ -67,10 +67,11 @@ const Skills = () => {
                 {codingProfiles.map((profile, idx) => (
                   <Card
                     key={profile.name}
-                    className="p-6 bg-card/70 border border-white/5 rounded-3xl space-y-4 animate-fade-in"
+                    className="group relative overflow-hidden p-6 bg-card/70 border border-white/5 rounded-3xl space-y-4 animate-fade-in transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card"
                     style={{ animationDelay: `${idx * 0.08}s` }}
                   >
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="relative flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <img
                           src={profile.icon}
@@ -93,7 +94,7 @@ const Skills = () => {
                       </a>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="relative space-y-2">
                       {profile.stats.map((stat) => (
                         <div
                           key={`${profile.name}-${stat.label}`}
@@ -106,7 +107,7 @@ const Skills = () => {
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-2 pt-2">
+                    <div className="relative flex items-center gap-2 pt-2">
                       {Array.from({ length: 5 }).map((_, starIndex) => (
                         <Star
                           key={`${profile.name}-star-${starIndex}`}
@@ -121,7 +122,7 @@ const Skills = () => {
                     </div>
 
                     {profile.grade && (
-                      <div className="flex items-center gap-3 pt-1 text-sm text-muted-foreground">
+                      <div className="relative flex items-center gap-3 pt-1 text-sm text-muted-foreground">
                         <span className="font-semibold text-foreground">Grade: {profile.grade}</span>
                         <span>Overall GitHub activity score</span>
                       </div>

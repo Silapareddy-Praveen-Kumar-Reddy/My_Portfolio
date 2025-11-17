@@ -1,73 +1,62 @@
-# Welcome to your Lovable project
+# Personal Portfolio – React + Vite
 
-## Project info
+A responsive, single-page developer portfolio built with **React 18**, **TypeScript**, **Vite**, **Tailwind CSS**, and **shadcn/ui**.  
+All major sections (Hero, Projects, Experience, Journey, Skills, Certificates, Contact) live in dedicated files so it’s easy to maintain or extend before publishing to GitHub/Pages.
 
-**URL**: https://lovable.dev/projects/860ae15b-7fbb-4172-8562-7bdde0d067be
+## Tech Stack
 
-## How can I edit this code?
+- React 18 + TypeScript
+- Vite 5
+- Tailwind CSS + shadcn/ui component primitives
+- Lucide icons, React Hook Form, Zod validation helpers
 
-There are several ways of editing your application.
+## Getting Started
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/860ae15b-7fbb-4172-8562-7bdde0d067be) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+git clone <your-repo-url>
+cd <repo>
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The dev server runs at http://localhost:5173 by default.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
+| Command         | Description                              |
+|-----------------|------------------------------------------|
+| `npm run dev`   | Start the Vite dev server with HMR       |
+| `npm run build` | Bundle the site into `dist/`             |
+| `npm run preview` | Preview the production build locally   |
+| `npm run lint`  | Lint source files with ESLint            |
+| `npm start`     | Serve the built app via `server.js` (optional Node hosting) |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+  components/
+    layout/        # Navigation, footer and shared layout pieces
+    ui/            # shadcn/ui primitives
+  sections/        # Page sections (Hero, Projects, Experience, ...)
+  data/            # Portfolio data sources
+  pages/           # Route-level components (Index, NotFound)
+  hooks/, lib/     # Utilities and custom hooks
+```
 
-This project is built with:
+## Deploying to GitHub Pages
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Run `npm run build` to generate `dist/`.
+2. Push the contents of `dist/` to a `gh-pages` branch (use `git subtree push --prefix dist origin gh-pages` or the `peaceiris/actions-gh-pages` GitHub Action).
+3. In your GitHub repository settings, enable Pages → Build from `gh-pages`.
+4. Each new deployment is as simple as `npm run build && git push origin main` + letting your workflow publish the fresh `dist/`.
 
-## How can I deploy this project?
+> Tip: the included `.gitignore` already excludes `dist/` and `node_modules/`, so your repository stays lean.
 
-Simply open [Lovable](https://lovable.dev/projects/860ae15b-7fbb-4172-8562-7bdde0d067be) and click on Share -> Publish.
+## Environment Variables
 
-## Can I connect a custom domain to my Lovable project?
+No secrets are required for local development. If you introduce APIs (contact forms, analytics, etc.) prefer `.env` files and never commit them—GitHub Pages does not expose server-side secrets.
 
-Yes, you can!
+## Contributing
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Feel free to fork this repo, create a feature or fix, and open a pull request. Make sure `npm run lint` and `npm run build` pass before submitting.

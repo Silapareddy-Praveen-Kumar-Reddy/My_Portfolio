@@ -7,10 +7,10 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState("");
 
   const navLinks = [
-    { href: "education", label: "Education" },
-    { href: "skills", label: "Skills" },
     { href: "projects", label: "Projects" },
     { href: "experience", label: "Experience" },
+    { href: "education", label: "Journey" },
+    { href: "skills", label: "Skills" },
     { href: "certificates", label: "Certificates" },
     { href: "contact", label: "Contact" },
   ];
