@@ -189,13 +189,23 @@ export const projects = [
 
 export const experiences = [
   {
+    role: "GitHub Open-Source Contributor",
+    company: "Community Projects",
+    date: "2024 – Present",
+    duties: [
+      "Contributed features and bug fixes across AI, Flutter, and backend repositories.",
+      "Opened and reviewed pull requests focused on developer experience and docs.",
+      "Spoke at campus meetups about open-source collaboration workflows."
+    ]
+  },
+  {
     role: "AI and ML Intern",
     company: "SmartBridge",
     date: "May 2025 – July 2025",
     duties: [
-      "Applied core AI/ML concepts.",
-      "Built foundational machine learning models and performed data analysis.",
-      "Collaborated on AI-driven projects."
+      "Applied core AI/ML concepts to develop practical solutions during a 2-month virtual internship.",
+      "Built foundational machine learning models and performed data analysis, enhancing project outcomes.",
+      "Collaborated on AI-driven projects, integrating real-world datasets to solve domain-specific problems."
     ]
   },
   {
@@ -203,9 +213,9 @@ export const experiences = [
     company: "Swecha",
     date: "Jan 2024 - Apr 2024",
     duties: [
-      "Focused on Natural Language Processing (NLP).",
-      "Developed NLP models for text classification, improving accuracy by 18%.",
-      "Collaborated with 2+ research teams."
+      "Worked as an ML Engineer Intern at Swecha, focusing on Natural Language Processing (NLP) and language model development.",
+      "Developed NLP models for text classification, improving accuracy by 18% over baseline models.",
+      "Collaborated with 2+ research teams to refine language models for regional language processing."
     ]
   }
 ];

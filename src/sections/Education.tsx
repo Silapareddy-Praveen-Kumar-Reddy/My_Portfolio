@@ -9,7 +9,7 @@ const Education = () => {
         <div className="space-y-8">
           <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold">
-              <span className="text-gradient">Journey</span>
+              <span className="text-gradient">My Resume</span>
             </h2>
             <p className="text-muted-foreground text-lg">
               Education and experience milestones
@@ -57,7 +57,7 @@ const Education = () => {
                 <p className="uppercase tracking-[0.35em] text-xs text-primary font-semibold">
                   2024 - Present
                 </p>
-                <h3 className="text-3xl font-bold">Job Experience</h3>
+                <h3 className="text-3xl font-bold">Professional Experience</h3>
               </div>
               <div className="relative pl-6">
                 <div className="absolute left-3 top-0 bottom-0 w-px bg-border" />

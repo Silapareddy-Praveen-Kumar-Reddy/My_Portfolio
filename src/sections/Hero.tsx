@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Download } from "lucide-react";
 import { personalData } from "@/data/portfolio";
+import { useTypewriter } from "@/hooks/use-typewriter";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const heroRoles = Array.from(
+    new Set(["AI & ML Enthusiast", "Professional Coder", ...personalData.roles])
+  );
+
+  const { text: typedRole } = useTypewriter(heroRoles);
 
   return (
     <section className="min-h-[90vh] flex items-center bg-gradient-to-b from-background via-background to-secondary/20">
@@ -20,8 +27,11 @@ const Hero = () => {
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 Hi, I'm <span className="text-gradient">{personalData.name.split(" ")[0]}</span>
               </h1>
-              <h2 className="text-2xl md:text-4xl font-semibold text-muted-foreground">
-                a {personalData.roles[0]}.
+              <h2 className="text-2xl md:text-4xl font-semibold text-muted-foreground flex items-center gap-3">
+                <span className="text-gradient">
+                  {typedRole || heroRoles[0]}
+                </span>
+                <span className="h-7 w-px bg-primary animate-pulse" aria-hidden />
               </h2>
             </div>
             <p className="text-lg text-muted-foreground max-w-2xl">
