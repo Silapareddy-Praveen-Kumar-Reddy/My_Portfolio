@@ -23,13 +23,13 @@ The dev server runs at http://localhost:5173 by default.
 
 ## Available Scripts
 
-| Command         | Description                              |
-|-----------------|------------------------------------------|
-| `npm run dev`   | Start the Vite dev server with HMR       |
-| `npm run build` | Bundle the site into `dist/`             |
-| `npm run preview` | Preview the production build locally   |
-| `npm run lint`  | Lint source files with ESLint            |
-| `npm start`     | Serve the built app via `server.js` (optional Node hosting) |
+| Command           | Description                                                 |
+| ----------------- | ----------------------------------------------------------- |
+| `npm run dev`     | Start the Vite dev server with HMR                          |
+| `npm run build`   | Bundle the site into `dist/`                                |
+| `npm run preview` | Preview the production build locally                        |
+| `npm run lint`    | Lint source files with ESLint                               |
+| `npm start`       | Serve the built app via `server.js` (optional Node hosting) |
 
 ## Project Structure
 
@@ -52,10 +52,6 @@ src/
 4. Each new deployment is as simple as `npm run build && git push origin main` + letting your workflow publish the fresh `dist/`.
 
 > Tip: the included `.gitignore` already excludes `dist/` and `node_modules/`, so your repository stays lean.
-
-## Environment Variables
-
-No secrets are required for local development. If you introduce APIs (contact forms, analytics, etc.) prefer `.env` files and never commit them—GitHub Pages does not expose server-side secrets.
 
 ## Contributing
 

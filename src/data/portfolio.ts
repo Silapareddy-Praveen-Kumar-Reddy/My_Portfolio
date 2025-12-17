@@ -127,10 +127,10 @@ export const codingProfiles = [
     icon: "https://leetcode.com/static/images/LeetCode_logo_rvs.png",
     link: "https://leetcode.com/u/SqePPgOvxd/",
     stats: [
-      { label: "Easy", value: "25" },
-      { label: "Medium", value: "29" },
-      { label: "Hard", value: "6" },
-      { label: "Total Solved", value: "60" }
+      { label: "Easy", value: "57" },
+      { label: "Medium", value: "50" },
+      { label: "Hard", value: "15" },
+      { label: "Total Solved", value: "120" }
     ],
     rating: 3
   },
@@ -140,7 +140,7 @@ export const codingProfiles = [
     link: "https://www.geeksforgeeks.org/user/22pa1aq04z/",
     stats: [
       { label: "Coding Score", value: "114" },
-      { label: "Problems Solved", value: "31" },
+      { label: "Problems Solved", value: "40" },
       { label: "Institute Rank", value: "583" }
     ],
     rating: 2
