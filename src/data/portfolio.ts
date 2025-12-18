@@ -1,16 +1,10 @@
 export const personalData = {
   name: "Praveen Kumar Reddy Silapareddy",
-  title: "B.Tech Computer Science Student | AI & ML Enthusiast",
+  title: "B.Tech Computer Science Student",
   email: "pp9111693@gmail.com",
   phone: "+917893349449",
   github: "https://github.com/Silapareddy-Praveen-Kumar-Reddy",
   linkedin: "https://www.linkedin.com/in/silapareddy-praveen/",
-  roles: [
-    "AI & ML Enthusiast",
-    "Full-Stack Developer",
-    "Problem Solver",
-    "Tech Innovator"
-  ]
 };
 
 export const educationTimeline = [

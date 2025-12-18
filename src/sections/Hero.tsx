@@ -10,7 +10,7 @@ const Hero = () => {
   };
 
   const heroRoles = Array.from(
-    new Set(["AI & ML Enthusiast", "Professional Coder", ...personalData.roles])
+    new Set(["ML Engineer", "Professional Coder", "Flutter Developer", "Full-Stack Developer", "Problem Solver", "Open Source Contributor"])
   );
 
   const { text: typedRole } = useTypewriter(heroRoles);
@@ -29,7 +29,7 @@ const Hero = () => {
               </h1>
               <h2 className="text-2xl md:text-4xl font-semibold text-muted-foreground flex items-center gap-3">
                 <span className="text-gradient">
-                  {typedRole || heroRoles[0]}
+                  {typedRole}
                 </span>
                 <span className="h-7 w-px bg-primary animate-pulse" aria-hidden />
               </h2>
