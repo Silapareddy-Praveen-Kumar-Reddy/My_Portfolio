@@ -15,7 +15,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <div className="fixed inset-0 pointer-events-none">
-        <Snowfall color={['#82c3d9']} />
+        <Snowfall color={['#10B981']} />
       </div>
       <BrowserRouter>
         <Routes>

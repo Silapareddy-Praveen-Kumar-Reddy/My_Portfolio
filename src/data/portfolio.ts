@@ -23,6 +23,14 @@ export const educationTimeline = [
     score: "889 / 1000",
     description:
       "Completed Mathematics, Physics, and Chemistry stream with distinction, strengthening analytical and problem-solving skills."
+  },
+  {
+    title: "SSC (10th Class)",
+    institution: "Pratibha E.M High School, Jangareddy Gudem",
+    period: "2019 - 2020",
+    score: "600 / 600",
+    description:
+      "Completed secondary education with perfect score, demonstrating excellence in academics and strong foundation for higher studies."
   }
 ];
 
