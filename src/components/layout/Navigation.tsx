@@ -2,34 +2,28 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const navLinks = [
+  { href: "projects", label: "Projects" },
+  { href: "education", label: "My Resume" },
+  { href: "skills", label: "Skills" },
+  { href: "certificates", label: "Certificates" },
+  { href: "contact", label: "Contact" },
+];
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  const navLinks = [
-    { href: "projects", label: "Projects" },
-    { href: "education", label: "My Resume" },
-    { href: "skills", label: "Skills" },
-    { href: "certificates", label: "Certificates" },
-    { href: "contact", label: "Contact" },
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map(link => document.getElementById(link.href));
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        if (section) {
-          const top = section.offsetTop;
-          const bottom = top + section.offsetHeight;
-
-          if (scrollPosition >= top && scrollPosition < bottom) {
-            setActiveSection(section.id);
-            break;
-          }
-        }
-      }
+      const scrollY = window.scrollY + 100;
+      const section = navLinks.find(({ href }) => {
+        const el = document.getElementById(href);
+        if (!el) return false;
+        const { offsetTop, offsetHeight } = el;
+        return scrollY >= offsetTop && scrollY < offsetTop + offsetHeight;
+      });
+      if (section) setActiveSection(section.href);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -37,8 +31,7 @@ const Navigation = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setIsOpen(false);
   };
 
@@ -48,30 +41,27 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-xl font-bold text-gradient cursor-pointer"
+            className="text-xl font-bold text-gradient cursor-pointer hover:text-white transition-colors"
           >
             PKR
           </button>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {navLinks.map(({ href, label }) => (
               <Button
-                key={link.href}
+                key={href}
                 variant="ghost"
-                onClick={() => scrollToSection(link.href)}
-                className={`${
-                  activeSection === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                onClick={() => scrollToSection(href)}
+                className={activeSection === href 
+                  ? "text-primary" 
+                  : "text-muted-foreground hover:text-white"
+                }
               >
-                {link.label}
+                {label}
               </Button>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="icon"
@@ -82,21 +72,20 @@ const Navigation = () => {
           </Button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 space-y-2 animate-fade-in">
-            {navLinks.map((link) => (
+            {navLinks.map(({ href, label }) => (
               <Button
-                key={link.href}
+                key={href}
                 variant="ghost"
-                onClick={() => scrollToSection(link.href)}
+                onClick={() => scrollToSection(href)}
                 className={`w-full justify-start ${
-                  activeSection === link.href
+                  activeSection === href
                     ? "text-primary bg-primary/10"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground hover:text-white"
                 }`}
               >
-                {link.label}
+                {label}
               </Button>
             ))}
           </div>

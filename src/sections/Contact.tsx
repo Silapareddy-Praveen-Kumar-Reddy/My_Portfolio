@@ -7,35 +7,68 @@ import { Label } from "@/components/ui/label";
 import { Mail, Phone, Github, Linkedin, Send } from "lucide-react";
 import { personalData } from "@/data/portfolio";
 
-const Contact = () => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+type FormState = {
+  name: string;
+  email: string;
+  message: string;
+};
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
-  };
+type Status = "idle" | "success" | "error";
+
+const contactLinks = [
+  { icon: Mail, label: "Email", value: personalData.email, href: `mailto:${personalData.email}`, gradient: "from-primary to-accent" },
+  { icon: Phone, label: "Phone", value: personalData.phone, href: `tel:${personalData.phone}`, gradient: "from-accent to-primary" },
+  { icon: Github, label: "GitHub", value: "View Profile", href: personalData.github, gradient: "from-primary to-accent", external: true },
+  { icon: Linkedin, label: "LinkedIn", value: "Connect", href: personalData.linkedin, gradient: "from-accent to-primary", external: true },
+] as const;
+
+const ContactLink = ({ icon: Icon, label, value, href, gradient, external }: typeof contactLinks[number]) => (
+  <a
+    href={href}
+    target={external ? "_blank" : undefined}
+    rel={external ? "noopener noreferrer" : undefined}
+    className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 border border-border/50 hover:bg-secondary hover:border-white transition-all"
+  >
+    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`}>
+      <Icon className="w-6 h-6 text-primary-foreground" />
+    </div>
+    <div className={value === personalData.email ? "overflow-hidden" : ""}>
+      <p className="text-sm text-muted-foreground">{label}</p>
+      <p className={`font-semibold text-foreground ${value === personalData.email ? "truncate" : ""}`}>
+        {value}
+      </p>
+    </div>
+  </a>
+);
+
+const Contact = () => {
+  const [formState, setFormState] = useState<FormState>({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<Status>("idle");
+
+  const updateField = (field: keyof FormState) => 
+    ({ target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormState(prev => ({ ...prev, [field]: target.value }));
+    };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    const subject = `Portfolio Contact from ${formState.name || "Visitor"}`;
+    const body = `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`;
+    const mailtoUrl = `mailto:${personalData.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
     try {
-      const subject = `Portfolio Contact from ${formState.name || "Visitor"}`;
-      const body = `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`;
-      window.location.href = `mailto:${personalData.email}?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
       setStatus("success");
       setFormState({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error(error);
+    } catch {
       setStatus("error");
     }
+  };
+
+  const statusMessages = {
+    success: "Email client opened. Thank you for reaching out!",
+    error: "Something went wrong. Please try emailing me directly.",
   };
 
   return (
@@ -53,76 +86,18 @@ const Contact = () => {
 
           <Card className="p-8 card-glow bg-card/50 backdrop-blur animate-fade-in">
             <div className="grid md:grid-cols-2 gap-6">
-              <a
-                href={`mailto:${personalData.email}`}
-                className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
-              >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <div className="overflow-hidden">
-                  <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-semibold text-foreground truncate">
-                    {personalData.email}
-                  </p>
-                </div>
-              </a>
-
-              <a
-                href={`tel:${personalData.phone}`}
-                className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
-              >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-semibold text-foreground">
-                    {personalData.phone}
-                  </p>
-                </div>
-              </a>
-
-              <a
-                href={personalData.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
-              >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                  <Github className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">GitHub</p>
-                  <p className="font-semibold text-foreground">View Profile</p>
-                </div>
-              </a>
-
-              <a
-                href={personalData.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
-              >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
-                  <Linkedin className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">LinkedIn</p>
-                  <p className="font-semibold text-foreground">Connect</p>
-                </div>
-              </a>
+              {contactLinks.map((link) => (
+                <ContactLink key={link.label} {...link} />
+              ))}
             </div>
 
             <div className="mt-8 text-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground"
+                className="border border-primary bg-primary/10 hover:bg-white hover:text-black hover:border-white transition-all"
                 asChild
               >
-                <a href={`mailto:${personalData.email}`}>
-                  Send Me an Email
-                </a>
+                <a href={`mailto:${personalData.email}`}>Send Me an Email</a>
               </Button>
             </div>
           </Card>
@@ -134,9 +109,10 @@ const Contact = () => {
               </p>
               <h3 className="text-3xl font-bold">Quick Contact Form</h3>
               <p className="text-muted-foreground text-sm">
-                Drop a message and I’ll get back to you shortly.
+                Drop a message and I'll get back to you shortly.
               </p>
             </div>
+
             <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -146,7 +122,7 @@ const Contact = () => {
                     name="name"
                     placeholder="John Doe"
                     value={formState.name}
-                    onChange={handleChange}
+                    onChange={updateField("name")}
                     required
                   />
                 </div>
@@ -158,11 +134,12 @@ const Contact = () => {
                     type="email"
                     placeholder="you@example.com"
                     value={formState.email}
-                    onChange={handleChange}
+                    onChange={updateField("email")}
                     required
                   />
                 </div>
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
                 <Textarea
@@ -171,31 +148,28 @@ const Contact = () => {
                   placeholder="Share your idea, collaboration request, or question..."
                   rows={5}
                   value={formState.message}
-                  onChange={handleChange}
+                  onChange={updateField("message")}
                   required
                 />
               </div>
+
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <p className="text-xs text-muted-foreground">
-                  By submitting, I’ll prepare a response directly to your email.
+                  By submitting, I'll prepare a response directly to your email.
                 </p>
                 <Button
                   type="submit"
                   size="lg"
-                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground flex items-center gap-2"
+                  className="border border-primary bg-primary/10 hover:bg-white hover:text-black hover:border-white transition-all flex items-center gap-2"
                 >
                   <Send className="w-4 h-4" />
                   Send Message
                 </Button>
               </div>
-              {status === "success" && (
-                <p className="text-sm text-green-500 text-center">
-                  Email client opened. Thank you for reaching out!
-                </p>
-              )}
-              {status === "error" && (
-                <p className="text-sm text-red-500 text-center">
-                  Something went wrong. Please try emailing me directly.
+
+              {status !== "idle" && (
+                <p className={`text-sm text-center ${status === "success" ? "text-green-500" : "text-red-500"}`}>
+                  {statusMessages[status]}
                 </p>
               )}
             </form>

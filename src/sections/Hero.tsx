@@ -3,20 +3,25 @@ import { Github, Linkedin, Download } from "lucide-react";
 import { personalData } from "@/data/portfolio";
 import { useTypewriter } from "@/hooks/use-typewriter";
 
+const scrollToSection = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+};
+
+const downloadResume = () => {
+  const link = document.createElement("a");
+  link.href = "/resume.pdf";
+  link.download = "resume.pdf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 const Hero = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const heroRoles = Array.from(
-    new Set(["ML Engineer", "Professional Coder", "Flutter Developer", "Full-Stack Developer", "Problem Solver", "Open Source Contributor"])
-  );
-
+  const heroRoles = ["ML Engineer", "Professional Coder", "Flutter Developer", "Full-Stack Developer", "Problem Solver", "Open Source Contributor"];
   const { text: typedRole } = useTypewriter(heroRoles);
 
   return (
-    <section className="min-h-[90vh] flex items-center bg-gradient-to-b from-background via-background to-secondary/20">
+    <section className="min-h-[90vh] flex items-center">
       <div className="container mx-auto px-4">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-6 animate-fade-in">
@@ -28,9 +33,7 @@ const Hero = () => {
                 Hi, I'm <span className="text-gradient">{personalData.name.split(" ")[0]}</span>
               </h1>
               <h2 className="text-2xl md:text-4xl font-semibold text-muted-foreground flex items-center gap-3">
-                <span className="text-gradient">
-                  {typedRole}
-                </span>
+                <span className="text-gradient">{typedRole}</span>
                 <span className="h-7 w-px bg-primary animate-pulse" aria-hidden />
               </h2>
             </div>
@@ -41,7 +44,7 @@ const Hero = () => {
             <div className="flex flex-wrap gap-4">
               <Button
                 size="lg"
-                className="px-10 py-6 rounded-full text-lg bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+                className="px-10 py-6 rounded-full text-lg border border-primary bg-primary/10 hover:bg-white hover:text-black hover:border-white transition-all"
                 onClick={() => scrollToSection("contact")}
               >
                 Hire Me.
@@ -49,15 +52,8 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="secondary"
-                className="px-10 py-6 rounded-full text-lg bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                onClick={() => {
-                  const link = document.createElement("a");
-                  link.href = "/resume.pdf";
-                  link.download = "resume.pdf";
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
+                className="px-10 py-6 rounded-full text-lg border border-border hover:border-white hover:text-white transition-all"
+                onClick={downloadResume}
               >
                 <Download className="w-4 h-4 mr-2" />
                 Download Resume
@@ -68,7 +64,7 @@ const Hero = () => {
                 href={personalData.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-card flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-white hover:border-white transition-all"
               >
                 <Github className="w-5 h-5" />
               </a>
@@ -76,7 +72,7 @@ const Hero = () => {
                 href={personalData.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-card flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-white hover:border-white transition-all"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
@@ -84,10 +80,9 @@ const Hero = () => {
           </div>
 
           <div className="relative max-w-sm ml-auto">
-            <div className="absolute inset-0 translate-x-4 translate-y-4 bg-primary/20 rounded-[32px] blur-3xl" />
-            <div className="relative rounded-[32px] bg-card/40 backdrop-blur-lg border border-white/5 shadow-[0_20px_80px_rgba(0,0,0,0.4)] overflow-hidden">
+            <div className="relative rounded-[32px] bg-card/40 backdrop-blur-lg shadow-[0_20px_80px_rgba(0,0,0,0.4)] overflow-hidden">
               <img
-                src="/profile.jpg"
+                src="/profile.png"
                 alt={personalData.name}
                 className="w-full h-full object-cover"
               />
