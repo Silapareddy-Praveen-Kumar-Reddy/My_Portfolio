@@ -55,7 +55,7 @@ const Education = () => (
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <div className="text-left space-y-2">
-              <p className="uppercase tracking-[0.35em] text-xs text-primary font-semibold">2020 - 2026</p>
+              <p className="uppercase tracking-[0.35em] text-xs text-primary font-semibold">2019 - 2026</p>
               <h3 className="text-3xl font-bold">Education Quality</h3>
             </div>
             <div className="relative pl-6">
