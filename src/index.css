@@ -176,25 +176,22 @@ button { font-family: 'Poppins', sans-serif; }
 
 /* ══════════════════════════════════════════════════════════════
    TABLET  701–900px
-   Stacked: sidebar → tabnav (separator row) → right-col
+   Stacked: sidebar → right-col (Nav is fixed bottom)
 ══════════════════════════════════════════════════════════════ */
 @media (min-width: 701px) and (max-width: 900px) {
+  .portfolio-wrapper { padding: 16px 16px 72px; } /* room for fixed nav */
+
   .portfolio-layout {
     grid-template-columns: 1fr;
     grid-template-areas:
       "sidebar"
-      "tablet-nav"
       "right-col";
     gap: 20px;
   }
 
   .sidebar-area   { position: static; }
-  .tablet-nav-row {
-    display: flex;
-    justify-content: center;
-    grid-area: tablet-nav;
-  }
-  .desktop-nav-row { display: none; }  /* nav is in tablet row instead */
+  .tablet-nav-row { display: none; }
+  .desktop-nav-row { display: none; }
 
   /* Tablet: always show contacts */
   .sidebar-contacts-wrapper {
@@ -276,13 +273,13 @@ button { font-family: 'Poppins', sans-serif; }
 
 
 /* ══════════════════════════════════════════════════════════════
-   MOBILE FIXED BOTTOM NAV
+   MOBILE & TABLET FIXED BOTTOM NAV (≤900px)
 ══════════════════════════════════════════════════════════════ */
 .mobile-bottom-nav {
-  display: none;  /* hidden on desktop + tablet */
+  display: none;  /* hidden on desktop */
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
