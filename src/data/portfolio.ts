@@ -41,61 +41,14 @@ export const whatImDoing = [
 ];
 
 export const skillProficiencies = [
-  {
-    category: "Programming Languages",
-    skills: [
-      { name: "Python", percent: 85 },
-      { name: "Java", percent: 75 },
-      { name: "JavaScript", percent: 80 },
-      { name: "SQL", percent: 74 },
-      { name: "Dart", percent: 72 }
-    ]
-  },
-  {
-    category: "Libraries & Frameworks",
-    skills: [
-      { name: "React.js", percent: 72 },
-      { name: "Node.js", percent: 76 },
-      { name: "Flask", percent: 78 },
-      { name: "FastAPI", percent: 75 },
-      { name: "Flutter", percent: 74 },
-      { name: "TailwindCSS", percent: 78 },
-      { name: "Pandas", percent: 80 },
-      { name: "NumPy", percent: 78 },
-      { name: "Kafka", percent: 65 },
-      { name: "N8N", percent: 60 },
-      { name: "OpenCV", percent: 70 },
-      { name: "REST API", percent: 80 }
-    ]
-  },
-  {
-    category: "Databases",
-    skills: [
-      { name: "MySQL", percent: 76 },
-      { name: "MongoDB", percent: 70 },
-      { name: "Firebase", percent: 78 }
-    ]
-  },
-  {
-    category: "Tools & Platforms",
-    skills: [
-      { name: "Git", percent: 84 },
-      { name: "GitHub", percent: 82 },
-      { name: "VS Code", percent: 90 },
-      { name: "Figma", percent: 68 },
-      { name: "Excel", percent: 72 }
-    ]
-  },
-  {
-    category: "Soft Skills",
-    skills: [
-      { name: "Communication", percent: 88 },
-      { name: "Problem-Solving", percent: 85 },
-      { name: "Time Management", percent: 80 },
-      { name: "Adaptability", percent: 85 },
-      { name: "Teamwork", percent: 82 }
-    ]
-  }
+  { name: "Python", percent: 85 },
+  { name: "Java", percent: 75 },
+  { name: "JavaScript", percent: 80 },
+  { name: "Flutter / Dart", percent: 75 },
+  { name: "React.js", percent: 72 },
+  { name: "Flask / FastAPI", percent: 78 },
+  { name: "SQL / MongoDB", percent: 74 },
+  { name: "Machine Learning", percent: 70 }
 ];
 
 export const educationTimeline = [

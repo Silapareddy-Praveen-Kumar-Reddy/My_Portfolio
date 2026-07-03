@@ -225,36 +225,15 @@ const ResumeTab = () => {
       {/* Skills */}
       <section>
         <h2 className="section-title">My Skills</h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          {skillProficiencies.map((group) => (
-            <div key={group.category}>
-              {/* Category label */}
-              <p
-                style={{
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#ffb100",
-                  marginBottom: 12,
-                  paddingBottom: 6,
-                  borderBottom: "1px solid rgba(255,177,0,0.15)",
-                }}
-              >
-                {group.category}
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                  gap: "0 32px",
-                }}
-              >
-                {group.skills.map((skill) => (
-                  <SkillBar key={skill.name} name={skill.name} percent={skill.percent} />
-                ))}
-              </div>
-            </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: "0 32px",
+          }}
+        >
+          {skillProficiencies.map((skill) => (
+            <SkillBar key={skill.name} name={skill.name} percent={skill.percent} />
           ))}
         </div>
       </section>
