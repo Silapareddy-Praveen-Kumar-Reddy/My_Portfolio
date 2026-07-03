@@ -9,6 +9,11 @@ import ContactTab from "@/components/tabs/ContactTab";
 const Index = () => {
   const [activeTab, setActiveTab] = useState<Tab>("about");
 
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const renderTab = () => {
     switch (activeTab) {
       case "about":     return <AboutTab     key="about" />;
@@ -34,7 +39,7 @@ const Index = () => {
           Hidden on desktop (nav is inside right-col) and mobile (fixed bottom).
         */}
         <div className="tablet-nav-row">
-          <TabNav active={activeTab} onChange={setActiveTab} />
+          <TabNav active={activeTab} onChange={handleTabChange} />
         </div>
 
         {/*
@@ -47,7 +52,7 @@ const Index = () => {
         <div className="right-col glass-card">
           {/* Desktop nav: top-right inside the card */}
           <div className="desktop-nav-row">
-            <TabNav active={activeTab} onChange={setActiveTab} />
+            <TabNav active={activeTab} onChange={handleTabChange} />
           </div>
 
           {/* Page content */}
@@ -68,7 +73,7 @@ const Index = () => {
         Only visible on ≤700px as a fixed bar at the bottom of the screen.
       */}
       <nav className="mobile-bottom-nav" aria-label="Main navigation">
-        <TabNav active={activeTab} onChange={setActiveTab} />
+        <TabNav active={activeTab} onChange={handleTabChange} />
       </nav>
     </div>
   );
