@@ -164,7 +164,18 @@ const ResumeTab = () => (
 
     {/* ── Education ────────────────────────────────────────── */}
     <section style={{ marginBottom: 40 }}>
-      <h2 className="section-title">Education</h2>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 26 }}>
+        <h2 className="section-title" style={{ marginBottom: 0 }}>Education</h2>
+        <a
+          href="https://drive.google.com/file/d/1AqzE74ytfq361PEzDh_5XACyVNiFPI85/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary"
+          style={{ padding: "8px 18px", fontSize: "0.82rem" }}
+        >
+          View Resume
+        </a>
+      </div>
       <div className="timeline">
         {educationTimeline.map((ed) => (
           <TimelineItem
