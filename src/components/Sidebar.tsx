@@ -23,7 +23,7 @@ const Sidebar = () => {
           }}
         >
           <img
-            src="/profile.jpg"
+            src="/profile.png"
             alt="Praveen Kumar Reddy"
             style={{
               width: "100%",
