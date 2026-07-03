@@ -70,7 +70,7 @@ const Sidebar = () => {
           transition: "max-height 0.45s ease, opacity 0.35s ease",
         }}
       >
-        <div className="separator" />
+        <div className="separator" style={{ margin: "24px 0" }} />
 
         <ul className="contacts-list">
           {CONTACTS.map((c) => (
@@ -79,20 +79,20 @@ const Sidebar = () => {
               <div className="contact-info">
                 <span className="contact-label">{c.label}</span>
                 {c.isLink ? (
-                  <a href={(c as any).href} className="contact-value">
+                  <a href={(c as any).href} className="contact-value" title={c.value}>
                     {c.value}
                   </a>
                 ) : (
-                  <span className="contact-value">{c.value}</span>
+                  <span className="contact-value" title={c.value}>{c.value}</span>
                 )}
               </div>
             </li>
           ))}
         </ul>
 
-        <div className="separator" />
-
-        <ul className="social-list">
+        {/* Removed bottom separator to match reference */}
+        
+        <ul className="social-list" style={{ marginTop: 28 }}>
           {SOCIALS.map((s) => (
             <li key={s.label}>
               <a

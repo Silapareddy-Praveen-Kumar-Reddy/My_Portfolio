@@ -65,19 +65,20 @@ button { font-family: 'Poppins', sans-serif; }
    ICON BOX  (glass at small scale)
 ══════════════════════════════════════════════════════════════ */
 .icon-box {
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 9px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffb100;
   transition: background 0.2s, border-color 0.2s;
 }
-.icon-box:hover { background: rgba(255,177,0,0.1); border-color: rgba(255,177,0,0.25); }
+.icon-box:hover { background: rgba(255,177,0,0.08); border-color: rgba(255,177,0,0.15); }
 
 
 /* ══════════════════════════════════════════════════════════════
@@ -336,44 +337,45 @@ button { font-family: 'Poppins', sans-serif; }
 
 /* Rounded-square avatar (NOT circle) */
 .sidebar-avatar-wrap {
-  width: 110px;
-  height: 110px;
+  width: 140px;
+  height: 140px;
   flex-shrink: 0;
-  border-radius: 18px;
-  padding: 3px;
-  background: linear-gradient(135deg, #ffb100, #ff8c00);
+  border-radius: 30px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-avatar-img {
   width: 100%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 30px;
   object-fit: cover;
   object-position: center top;
-  border: 2px solid #1a1a1f;
   display: block;
 }
 
 .sidebar-identity { flex: 1; min-width: 0; }
 
 .sidebar-name {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.45rem;
+  font-weight: 600;
   color: #fff;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .sidebar-title-pill {
   display: inline-block;
-  font-size: 0.73rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  color: #888;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  color: #d1d1d1;
+  background: rgba(255,255,255,0.06);
   border-radius: 8px;
-  padding: 4px 12px;
-  letter-spacing: 0.02em;
+  padding: 8px 16px;
+  letter-spacing: 0.01em;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -406,27 +408,29 @@ button { font-family: 'Poppins', sans-serif; }
   flex-shrink: 0;
 }
 
-.contacts-list { display: flex; flex-direction: column; gap: 14px; }
+.contacts-list { display: flex; flex-direction: column; gap: 26px; }
 
-.contact-item  { display: flex; align-items: flex-start; gap: 12px; }
+.contact-item  { display: flex; align-items: flex-start; gap: 16px; }
 
 .contact-info  { min-width: 0; }
 
 .contact-label {
   display: block;
-  font-size: 0.66rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  color: #555;
+  color: #666;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 3px;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
 }
 
 .contact-value {
   display: block;
-  font-size: 0.82rem;
-  color: #d4d4d4;
-  word-break: break-word;
+  font-size: 0.88rem;
+  color: #eaeaea;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 1.4;
 }
 
