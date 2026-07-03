@@ -11,78 +11,65 @@ const Index = () => {
 
   const renderTab = () => {
     switch (activeTab) {
-      case "about":
-        return <AboutTab key="about" />;
-      case "resume":
-        return <ResumeTab key="resume" />;
-      case "portfolio":
-        return <PortfolioTab key="portfolio" />;
-      case "contact":
-        return <ContactTab key="contact" />;
+      case "about":     return <AboutTab     key="about" />;
+      case "resume":    return <ResumeTab    key="resume" />;
+      case "portfolio": return <PortfolioTab key="portfolio" />;
+      case "contact":   return <ContactTab   key="contact" />;
     }
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#1a1a1f",
-        padding: "clamp(16px, 4vw, 40px)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-start",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "min(300px, 100%) 1fr",
-          gridTemplateAreas: '"sidebar main"',
-          gap: 24,
-          width: "100%",
-          maxWidth: 1100,
-          alignItems: "start",
-        }}
-        className="portfolio-layout"
-      >
-        {/* LEFT SIDEBAR — sticky */}
-        <div
-          style={{
-            gridArea: "sidebar",
-            position: "sticky",
-            top: "clamp(16px, 4vw, 40px)",
-          }}
-        >
+    <div className="portfolio-wrapper">
+      <div className="portfolio-layout">
+
+        {/* ── LEFT SIDEBAR ─────────────────────────────────── */}
+        <aside className="sidebar-area">
           <Sidebar />
+        </aside>
+
+        {/*
+          ── TABLET-ONLY NAV ROW ───────────────────────────────
+          Shown only on 701–900px as its own separator row
+          between sidebar and the content card.
+          Hidden on desktop (nav is inside right-col) and mobile (fixed bottom).
+        */}
+        <div className="tablet-nav-row">
+          <TabNav active={activeTab} onChange={setActiveTab} />
         </div>
 
-        {/* RIGHT MAIN PANEL */}
-        <main
-          style={{
-            gridArea: "main",
-            background: "#212429",
-            borderRadius: 20,
-            padding: "clamp(18px, 3vw, 32px)",
-            minHeight: "calc(100vh - 80px)",
-          }}
-        >
-          <TabNav active={activeTab} onChange={setActiveTab} />
-          {renderTab()}
-        </main>
+        {/*
+          ── RIGHT COLUMN ──────────────────────────────────────
+          On desktop this is ONE glass card containing:
+            • desktop-nav-row  (top-right, inside card)
+            • content panel    (below)
+          On tablet/mobile the desktop-nav-row is hidden.
+        */}
+        <div className="right-col glass-card">
+          {/* Desktop nav: top-right inside the card */}
+          <div className="desktop-nav-row">
+            <TabNav active={activeTab} onChange={setActiveTab} />
+          </div>
+
+          {/* Page content */}
+          <main
+            className="content-inner"
+            id={`panel-${activeTab}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeTab}`}
+          >
+            {renderTab()}
+          </main>
+        </div>
+
       </div>
 
-      {/* Responsive styles */}
-      <style>{`
-        @media (max-width: 768px) {
-          .portfolio-layout {
-            grid-template-columns: 1fr !important;
-            grid-template-areas: 'sidebar' 'main' !important;
-          }
-          .portfolio-layout > div:first-child {
-            position: static !important;
-          }
-        }
-      `}</style>
+      {/*
+        ── MOBILE FIXED BOTTOM NAV ───────────────────────────
+        Only visible on ≤700px as a fixed bar at the bottom of the screen.
+      */}
+      <nav className="mobile-bottom-nav" aria-label="Main navigation">
+        <TabNav active={activeTab} onChange={setActiveTab} />
+      </nav>
     </div>
   );
 };

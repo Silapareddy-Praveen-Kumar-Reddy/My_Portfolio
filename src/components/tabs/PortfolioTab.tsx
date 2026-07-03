@@ -1,52 +1,79 @@
 import { useState } from "react";
-import { projects } from "@/data/portfolio";
-import { Github, ExternalLink, X } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 
 type Category = "All" | "Web Dev" | "AI/ML" | "Mobile";
 
-const PROJECT_CATEGORIES: Record<string, Category[]> = {
-  "WASTE CLASSIFIER": ["AI/ML", "Web Dev"],
-  AGRIBRIDGE: ["Mobile"],
-  "TRASH TO TREASURE": ["Web Dev"],
-  "FACE RECOGNITION": ["AI/ML"],
-};
-
-const PROJECT_IMAGES: Record<string, string> = {
-  "WASTE CLASSIFIER":
-    "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=600&q=80",
-  AGRIBRIDGE:
-    "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=80",
-  "TRASH TO TREASURE":
-    "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80",
-  "FACE RECOGNITION":
-    "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80",
-};
-
 const FILTERS: Category[] = ["All", "Web Dev", "AI/ML", "Mobile"];
 
-const PortfolioTab = () => {
-  const [activeFilter, setActiveFilter] = useState<Category>("All");
-  const [modalProject, setModalProject] = useState<(typeof projects)[0] | null>(null);
+/* Project-level data (images + multi-category support) */
+const PROJECTS = [
+  {
+    title: "WASTE CLASSIFIER",
+    description:
+      "Developed an intelligent, Flask-based web system for real-time image recognition of municipal solid waste. Integrated a deep learning model to automate waste categorization, improving potential recycling efficiency by 25%.",
+    tech: "Flask, OpenCV, Anaconda Prompt, VGG16",
+    categories: ["AI/ML", "Web Dev"] as Category[],
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=460&h=230&fit=crop&q=80",
+    github:
+      "https://github.com/Silapareddy-Praveen-Kumar-Reddy/Waste-classification-using-Trasfer-Learning",
+    live: "https://waste-classification-using-trasfer-yrk0.onrender.com/",
+  },
+  {
+    title: "AGRIBRIDGE",
+    description:
+      "Designed and developed an app facilitating seamless connectivity for Farmers and Consumers using Flutter and Dart. Uses Firebase for authentication.",
+    tech: "Flutter, Dart, Firebase, FastAPI",
+    categories: ["Mobile"] as Category[],
+    image:
+      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=460&h=230&fit=crop&q=80",
+    github:
+      "https://github.com/Silapareddy-Praveen-Kumar-Reddy/Agribridge",
+  },
+  {
+    title: "TRASH TO TREASURE",
+    description:
+      "Developed a MERN stack application to help with trash maintenance and waste segregation. Implemented a gamification system, increasing user engagement by 25%.",
+    tech: "NodeJS, ExpressJS, Firebase, FastAPI",
+    categories: ["Web Dev"] as Category[],
+    image:
+      "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=460&h=230&fit=crop&q=80",
+    github:
+      "https://github.com/Silapareddy-Praveen-Kumar-Reddy/TRASH-TO-TRESURE",
+    live: "https://trash-to-treasure.netlify.app/",
+  },
+  {
+    title: "FACE RECOGNITION",
+    description:
+      "Built an app where users can upload an image to get a prediction using a pre-trained model. Achieved 96% accuracy and optimized detection algorithm with 30% faster processing.",
+    tech: "Python, OpenCV, MediaPipe",
+    categories: ["AI/ML"] as Category[],
+    image:
+      "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=460&h=230&fit=crop&q=80",
+    github:
+      "https://github.com/silapareddy/Face-Detection-Image-Processing-",
+  },
+];
 
-  const filtered = projects.filter((p) => {
-    if (activeFilter === "All") return true;
-    return PROJECT_CATEGORIES[p.title]?.includes(activeFilter);
-  });
+const PortfolioTab = () => {
+  const [active, setActive] = useState<Category>("All");
+
+  const filtered =
+    active === "All"
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.categories.includes(active));
 
   return (
-    <article
-      id="panel-portfolio"
-      role="tabpanel"
-      aria-labelledby="tab-portfolio"
-      className="tab-panel"
-    >
-      {/* Filter buttons */}
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 28 }}>
+    <article className="tab-panel">
+      <h2 className="section-title">Portfolio</h2>
+
+      {/* Filter bar */}
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
         {FILTERS.map((f) => (
           <button
             key={f}
-            onClick={() => setActiveFilter(f)}
-            className={`filter-btn ${activeFilter === f ? "active" : ""}`}
+            className={`filter-btn${active === f ? " active" : ""}`}
+            onClick={() => setActive(f)}
           >
             {f}
           </button>
@@ -54,59 +81,32 @@ const PortfolioTab = () => {
       </div>
 
       {/* Project grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-          gap: 20,
-        }}
-      >
+      <div className="project-grid">
         {filtered.map((project) => (
-          <div
-            key={project.title}
-            onClick={() => setModalProject(project)}
-            style={{
-              background: "#1a1a1f",
-              borderRadius: 16,
-              overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.06)",
-              cursor: "pointer",
-              transition: "transform 0.25s, border-color 0.25s, box-shadow 0.25s",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLDivElement;
-              el.style.transform = "translateY(-5px)";
-              el.style.borderColor = "rgba(255,177,0,0.35)";
-              el.style.boxShadow = "0 12px 32px rgba(255,177,0,0.12)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLDivElement;
-              el.style.transform = "translateY(0)";
-              el.style.borderColor = "rgba(255,255,255,0.06)";
-              el.style.boxShadow = "none";
-            }}
-          >
-            {/* Thumbnail */}
-            <div style={{ position: "relative", paddingTop: "58%", overflow: "hidden" }}>
+          <article key={project.title} className="project-card">
+            {/* ── Cover image with category badges ── */}
+            <div style={{ position: "relative", overflow: "hidden" }}>
               <img
-                src={PROJECT_IMAGES[project.title]}
+                src={project.image}
                 alt={project.title}
                 style={{
-                  position: "absolute",
-                  inset: 0,
                   width: "100%",
-                  height: "100%",
+                  height: 200,
                   objectFit: "cover",
-                  transition: "transform 0.4s",
+                  display: "block",
+                  transition: "transform 0.4s ease",
                 }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
-                }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLImageElement).style.transform =
+                    "scale(1.04)")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLImageElement).style.transform =
+                    "scale(1)")
+                }
               />
-              {/* Category badge */}
+
+              {/* Category badges — top right, overlaid on image */}
               <div
                 style={{
                   position: "absolute",
@@ -115,18 +115,20 @@ const PortfolioTab = () => {
                   display: "flex",
                   gap: 5,
                   flexWrap: "wrap",
+                  justifyContent: "flex-end",
                 }}
               >
-                {PROJECT_CATEGORIES[project.title]?.map((cat) => (
+                {project.categories.map((cat) => (
                   <span
                     key={cat}
                     style={{
                       fontSize: "0.68rem",
-                      fontWeight: 600,
-                      background: "#ffb100",
+                      fontWeight: 700,
                       color: "#1a1a1f",
-                      padding: "2px 8px",
+                      background: "#ffb100",
                       borderRadius: 6,
+                      padding: "3px 9px",
+                      letterSpacing: "0.02em",
                     }}
                   >
                     {cat}
@@ -135,195 +137,87 @@ const PortfolioTab = () => {
               </div>
             </div>
 
-            {/* Card body */}
-            <div style={{ padding: "16px 18px" }}>
+            {/* ── Card body ── */}
+            <div style={{ padding: "16px 18px 18px" }}>
               <h3
                 style={{
                   fontSize: "0.95rem",
-                  fontWeight: 600,
-                  color: "#ffffff",
-                  marginBottom: 6,
+                  fontWeight: 700,
+                  color: "#fff",
+                  marginBottom: 8,
+                  letterSpacing: "0.02em",
                 }}
               >
                 {project.title}
               </h3>
+
               <p
                 style={{
-                  fontSize: "0.78rem",
-                  color: "#9a9a9a",
-                  lineHeight: 1.55,
+                  fontSize: "0.82rem",
+                  color: "#777",
+                  lineHeight: 1.7,
+                  marginBottom: 12,
                   display: "-webkit-box",
-                  WebkitLineClamp: 2,
+                  WebkitLineClamp: 3,
                   WebkitBoxOrient: "vertical",
                   overflow: "hidden",
                 }}
               >
                 {project.description}
               </p>
+
+              {/* Tech stack — orange text, comma-separated */}
               <p
                 style={{
-                  fontSize: "0.72rem",
-                  color: "#ffb100",
-                  marginTop: 8,
+                  fontSize: "0.8rem",
                   fontWeight: 500,
+                  color: "#ffb100",
+                  marginBottom: 14,
+                  lineHeight: 1.5,
                 }}
               >
                 {project.tech}
               </p>
-            </div>
-          </div>
-        ))}
-      </div>
 
-      {/* Modal */}
-      {modalProject && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={modalProject.title}
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.75)",
-            backdropFilter: "blur(6px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-            padding: 20,
-          }}
-          onClick={() => setModalProject(null)}
-        >
-          <div
-            style={{
-              background: "#212429",
-              borderRadius: 20,
-              overflow: "hidden",
-              width: "100%",
-              maxWidth: 540,
-              maxHeight: "90vh",
-              overflowY: "auto",
-              border: "1px solid rgba(255,177,0,0.2)",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal image */}
-            <div style={{ position: "relative", paddingTop: "50%", overflow: "hidden" }}>
-              <img
-                src={PROJECT_IMAGES[modalProject.title]}
-                alt={modalProject.title}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-              <button
-                onClick={() => setModalProject(null)}
-                aria-label="Close modal"
-                style={{
-                  position: "absolute",
-                  top: 12,
-                  right: 12,
-                  background: "rgba(0,0,0,0.6)",
-                  border: "none",
-                  borderRadius: "50%",
-                  width: 34,
-                  height: 34,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  color: "#ffffff",
-                }}
-              >
-                <X size={16} />
-              </button>
-            </div>
-
-            {/* Modal content */}
-            <div style={{ padding: "24px 26px" }}>
-              <h3
-                style={{
-                  fontSize: "1.15rem",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  marginBottom: 6,
-                }}
-              >
-                {modalProject.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: "0.78rem",
-                  color: "#ffb100",
-                  fontWeight: 600,
-                  marginBottom: 14,
-                }}
-              >
-                {modalProject.tech}
-              </p>
-              <p
-                style={{
-                  fontSize: "0.87rem",
-                  color: "#b0b0b0",
-                  lineHeight: 1.75,
-                  marginBottom: 20,
-                }}
-              >
-                {modalProject.description}
-              </p>
-
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              {/* Action links */}
+              <div style={{ display: "flex", gap: 8 }}>
                 <a
-                  href={modalProject.link}
+                  href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    padding: "8px 18px",
-                    background: "rgba(255,255,255,0.06)",
-                    borderRadius: 10,
-                    color: "#e8e8e8",
-                    fontSize: "0.84rem",
-                    fontWeight: 500,
-                    textDecoration: "none",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    transition: "background 0.2s",
-                  }}
+                  className="btn-outline"
                 >
-                  <Github size={15} /> View Code
+                  <Github size={13} strokeWidth={1.8} />
+                  Code
                 </a>
-                {(modalProject as any).liveLink && (
+                {project.live && (
                   <a
-                    href={(modalProject as any).liveLink}
+                    href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                      padding: "8px 18px",
-                      background: "#ffb100",
-                      borderRadius: 10,
-                      color: "#1a1a1f",
-                      fontSize: "0.84rem",
-                      fontWeight: 600,
-                      textDecoration: "none",
-                      transition: "background 0.2s",
-                    }}
+                    className="btn-outline"
                   >
-                    <ExternalLink size={15} /> Live Demo
+                    <ExternalLink size={13} strokeWidth={1.8} />
+                    Live
                   </a>
                 )}
               </div>
             </div>
-          </div>
-        </div>
+          </article>
+        ))}
+      </div>
+
+      {filtered.length === 0 && (
+        <p
+          style={{
+            textAlign: "center",
+            color: "#444",
+            marginTop: 48,
+            fontSize: "0.9rem",
+          }}
+        >
+          No projects in this category yet.
+        </p>
       )}
     </article>
   );

@@ -1,201 +1,160 @@
+import { ExternalLink } from "lucide-react";
 import { bio, whatImDoing, codingProfiles } from "@/data/portfolio";
-import { ExternalLink, Star } from "lucide-react";
 
-const AboutTab = () => {
-  return (
-    <article
-      id="panel-about"
-      role="tabpanel"
-      aria-labelledby="tab-about"
-      className="tab-panel"
-      style={{ display: "flex", flexDirection: "column", gap: 36 }}
-    >
-      {/* About Me */}
-      <section>
-        <h2 className="section-title">About Me</h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          {bio.map((para, i) => (
-            <p
-              key={i}
-              style={{
-                color: "#b0b0b0",
-                lineHeight: 1.8,
-                fontSize: "0.92rem",
-                fontWeight: 300,
-              }}
-            >
-              {para}
-            </p>
-          ))}
-        </div>
-      </section>
+/* Show only LeetCode + GFG (not GitHub Stats) */
+const CODING_CARDS = codingProfiles.slice(0, 2);
 
-      {/* What I'm Doing */}
-      <section>
-        <h2 className="section-title">What I'm Doing</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-            gap: 16,
-          }}
+const AboutTab = () => (
+  <article className="tab-panel">
+
+    {/* ── About Me ───────────────────────────────────────────── */}
+    <h2 className="section-title">About Me</h2>
+
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 40 }}>
+      {bio.map((para, i) => (
+        <p
+          key={i}
+          style={{ fontSize: "0.88rem", lineHeight: 1.82, color: "#999", maxWidth: "70ch" }}
         >
-          {whatImDoing.map((item, i) => (
-            <div
-              key={i}
+          {para}
+        </p>
+      ))}
+    </div>
+
+    {/* ── What I'm Doing ─────────────────────────────────────── */}
+    <h3 className="sub-title">What I'm Doing</h3>
+
+    <div className="service-grid" style={{ marginBottom: 44 }}>
+      {whatImDoing.map((item) => (
+        <div key={item.title} className="service-card">
+          {/* Emoji icon — large, in a glass box */}
+          <div
+            className="service-icon-box"
+            style={{ fontSize: "1.35rem", lineHeight: 1 }}
+          >
+            {item.icon}
+          </div>
+
+          <div>
+            <h4
               style={{
-                background: "#1a1a1f",
-                borderRadius: 16,
-                padding: "20px 22px",
-                display: "flex",
-                gap: 16,
-                alignItems: "flex-start",
-                border: "1px solid rgba(255,255,255,0.06)",
-                transition: "border-color 0.2s, transform 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,177,0,0.3)";
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.06)";
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                fontSize: "0.92rem",
+                fontWeight: 600,
+                color: "#fff",
+                marginBottom: 6,
               }}
             >
-              <div
+              {item.title}
+            </h4>
+            <p style={{ fontSize: "0.82rem", color: "#6e6e6e", lineHeight: 1.72 }}>
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* ── Coding Profiles ────────────────────────────────────── */}
+    <h3 className="sub-title">Coding Profiles</h3>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 14,
+      }}
+      className="coding-profiles-grid"
+    >
+      {CODING_CARDS.map((profile) => (
+        <div key={profile.name} className="coding-profile-card">
+          {/* Header: logo + name + visit link */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 16,
+              paddingBottom: 14,
+              borderBottom: "1px solid rgba(255,255,255,0.07)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <img
+                src={profile.icon}
+                alt={profile.name}
                 style={{
-                  fontSize: "1.8rem",
-                  flexShrink: 0,
-                  lineHeight: 1,
-                  marginTop: 2,
+                  width: 26,
+                  height: 26,
+                  objectFit: "contain",
+                  borderRadius: 4,
+                }}
+              />
+              <span
+                style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  color: "#fff",
                 }}
               >
-                {item.icon}
-              </div>
-              <div>
-                <h3
-                  style={{
-                    fontSize: "0.95rem",
-                    fontWeight: 600,
-                    color: "#ffffff",
-                    marginBottom: 6,
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "0.82rem",
-                    color: "#9a9a9a",
-                    lineHeight: 1.65,
-                    fontWeight: 300,
-                  }}
-                >
-                  {item.description}
-                </p>
-              </div>
+                {profile.name}
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Coding Profiles */}
-      <section>
-        <h2 className="section-title">Coding Profiles</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            gap: 16,
-          }}
-        >
-          {codingProfiles.map((profile) => (
-            <div
-              key={profile.name}
+            <a
+              href={profile.link}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                background: "#1a1a1f",
-                borderRadius: 16,
-                padding: "18px 20px",
-                border: "1px solid rgba(255,255,255,0.06)",
-                transition: "border-color 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,177,0,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.06)";
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                fontSize: "0.78rem",
+                fontWeight: 600,
+                color: "#ffb100",
+                textDecoration: "none",
+                transition: "opacity 0.2s",
               }}
             >
+              Visit <ExternalLink size={12} strokeWidth={2} />
+            </a>
+          </div>
+
+          {/* Stats rows */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {profile.stats.map((stat, idx) => (
               <div
+                key={stat.label}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  marginBottom: 12,
+                  padding: "8px 0",
+                  borderBottom:
+                    idx < profile.stats.length - 1
+                      ? "1px solid rgba(255,255,255,0.04)"
+                      : "none",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <img
-                    src={profile.icon}
-                    alt={profile.name}
-                    style={{ width: 28, height: 28, objectFit: "contain" }}
-                  />
-                  <span
-                    style={{ fontWeight: 600, fontSize: "0.9rem", color: "#ffffff" }}
-                  >
-                    {profile.name}
-                  </span>
-                </div>
-                <a
-                  href={profile.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <span style={{ fontSize: "0.83rem", color: "#666" }}>
+                  {stat.label}
+                </span>
+                <span
                   style={{
-                    color: "#ffb100",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    fontSize: "0.75rem",
-                    fontWeight: 500,
-                    textDecoration: "none",
+                    fontSize: "0.88rem",
+                    fontWeight: 700,
+                    color: "#fff",
                   }}
                 >
-                  Visit <ExternalLink size={11} />
-                </a>
+                  {stat.value}
+                </span>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {profile.stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    <span style={{ color: "#9a9a9a" }}>{stat.label}</span>
-                    <span style={{ fontWeight: 600, color: "#e8e8e8" }}>{stat.value}</span>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: "flex", gap: 3, marginTop: 10 }}>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    size={13}
-                    style={{
-                      color: i < profile.rating ? "#ffb100" : "rgba(255,255,255,0.15)",
-                      fill: i < profile.rating ? "#ffb100" : "none",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
-    </article>
-  );
-};
+      ))}
+    </div>
+
+  </article>
+);
 
 export default AboutTab;
