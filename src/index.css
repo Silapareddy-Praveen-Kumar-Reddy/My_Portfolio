@@ -714,10 +714,10 @@ button { font-family: 'Poppins', sans-serif; }
    CODING PROFILE CARDS  (About tab)
 ══════════════════════════════════════════════════════════════ */
 .coding-profile-card {
-  padding: 18px;
+  padding: 12px 14px;
   background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px;
+  border-radius: 14px;
   transition: border-color 0.25s, background 0.25s;
 }
 .coding-profile-card:hover {

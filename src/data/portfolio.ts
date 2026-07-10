@@ -248,7 +248,7 @@ export const codingProfiles = [
     rating: 3
   },
   {
-    name: "GitHub Stats",
+    name: "Open Source Contributor",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
     link: "https://github.com/Silapareddy-Praveen-Kumar-Reddy",
     stats: [

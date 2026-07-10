@@ -1,8 +1,8 @@
 import { ExternalLink } from "lucide-react";
 import { bio, whatImDoing, codingProfiles } from "@/data/portfolio";
 
-/* Show only LeetCode + GFG (not GitHub Stats) */
-const CODING_CARDS = codingProfiles.slice(0, 2);
+/* Show LeetCode, GFG, and GitHub Stats */
+const CODING_CARDS = codingProfiles.slice(0, 3);
 
 const AboutTab = () => (
   <article className="tab-panel">
@@ -60,7 +60,7 @@ const AboutTab = () => (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
         gap: 14,
       }}
       className="coding-profiles-grid"
@@ -73,8 +73,8 @@ const AboutTab = () => (
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: 16,
-              paddingBottom: 14,
+              marginBottom: 12,
+              paddingBottom: 10,
               borderBottom: "1px solid rgba(255,255,255,0.07)",
             }}
           >
@@ -108,7 +108,7 @@ const AboutTab = () => (
                 display: "flex",
                 alignItems: "center",
                 gap: 5,
-                fontSize: "0.78rem",
+                fontSize: "0.74rem",
                 fontWeight: 600,
                 color: "#ffb100",
                 textDecoration: "none",
@@ -128,21 +128,21 @@ const AboutTab = () => (
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "8px 0",
+                  padding: "5px 0",
                   borderBottom:
                     idx < profile.stats.length - 1
                       ? "1px solid rgba(255,255,255,0.04)"
                       : "none",
                 }}
               >
-                <span style={{ fontSize: "0.83rem", color: "#666" }}>
+                <span style={{ fontSize: "0.78rem", color: "#777" }}>
                   {stat.label}
                 </span>
                 <span
                   style={{
-                    fontSize: "0.88rem",
+                    fontSize: "0.83rem",
                     fontWeight: 700,
-                    color: "#fff",
+                    color: "#e6e6e6",
                   }}
                 >
                   {stat.value}
