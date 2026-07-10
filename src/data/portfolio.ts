@@ -3,7 +3,7 @@ export const personalData = {
   title: "Software Engineer | ML Engineer",
   email: "pp9111693@gmail.com",
   phone: "+91 7893349449",
-  dob: "Not disclosed",
+  dob: "October 2004",
   location: "Bhimavaram, Andhra Pradesh, India",
   github: "https://github.com/Silapareddy-Praveen-Kumar-Reddy",
   linkedin: "https://www.linkedin.com/in/silapareddy-praveen/",
