@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Phone, Calendar, MapPin, Github, Linkedin, Code2, Globe, ChevronDown } from "lucide-react";
 import { personalData } from "@/data/portfolio";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const CONTACTS = [
   { icon: <Mail    size={15} strokeWidth={1.8} />, label: "Email",    value: personalData.email,    href: `mailto:${personalData.email}`,   isLink: true },
@@ -108,6 +109,11 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* ── Visitor Counter ── */}
+      <div className="sidebar-visitor-wrap">
+        <VisitorCounter />
       </div>
 
     </aside>
