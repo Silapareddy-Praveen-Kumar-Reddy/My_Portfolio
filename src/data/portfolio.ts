@@ -292,7 +292,7 @@ export const projects = [
 
 export const experiences = [
   {
-    role: "Open Source Contributor",
+    role: "AWS Relationship Schema Contributor",
     company: "Meshery (CNCF Project)",
     date: "Mar 2026 – Jun 2026",
     companyLink: "https://github.com/meshery/meshery",
