@@ -9,11 +9,12 @@ interface Particle {
 }
 
 const PARTICLE_COUNT = 70;
-const MAX_DISTANCE = 140;       // line draw distance between particles
-const MOUSE_RADIUS = 180;       // cursor interaction radius
+const MAX_DISTANCE = 150;       // line draw distance between particles
+const MOUSE_RADIUS = 200;       // cursor interaction radius
 const SPEED = 0.45;
-const DOT_COLOR = "rgba(96,200,220,";    // teal-ish dots
-const LINE_COLOR = "rgba(80,180,210,";   // connecting line color
+const DOT_COLOR  = "rgba(0,230,255,";    // sharp cyan dots
+const LINE_COLOR = "rgba(0,210,255,";    // vivid cyan lines
+const MOUSE_LINE = "rgba(80,200,255,";   // slightly warmer mouse lines
 
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -83,8 +84,8 @@ const ParticleBackground = () => {
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `${LINE_COLOR}${(alpha * 0.45).toFixed(3)})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `${LINE_COLOR}${(alpha * 0.85).toFixed(3)})`;
+            ctx.lineWidth = alpha * 1.4 + 0.3;   // thicker near particles
             ctx.stroke();
           }
         }
@@ -102,24 +103,30 @@ const ParticleBackground = () => {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mx, my);
-          ctx.strokeStyle = `${LINE_COLOR}${(alpha * 0.7).toFixed(3)})`;
-          ctx.lineWidth = 0.9;
+          ctx.strokeStyle = `${MOUSE_LINE}${(alpha * 0.95).toFixed(3)})`;
+          ctx.lineWidth = alpha * 2.0 + 0.4;     // bold near cursor
           ctx.stroke();
         }
 
-        // Draw dot
+        // Draw dot with glow
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "rgba(0,220,255,0.9)";
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `${DOT_COLOR}0.8)`;
+        ctx.fillStyle = `${DOT_COLOR}1)`;
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
 
       // Draw cursor dot
       if (mx > 0) {
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "rgba(80,200,255,0.9)";
         ctx.beginPath();
-        ctx.arc(mx, my, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(200,220,255,0.55)";
+        ctx.arc(mx, my, 4, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(180,240,255,0.9)";
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
 
       rafId.current = requestAnimationFrame(draw);
