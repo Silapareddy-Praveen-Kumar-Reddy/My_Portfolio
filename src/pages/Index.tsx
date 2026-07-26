@@ -5,6 +5,7 @@ import AboutTab from "@/components/tabs/AboutTab";
 import ResumeTab from "@/components/tabs/ResumeTab";
 import PortfolioTab from "@/components/tabs/PortfolioTab";
 import ContactTab from "@/components/tabs/ContactTab";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<Tab>("about");
@@ -25,6 +26,9 @@ const Index = () => {
 
   return (
     <div className="portfolio-wrapper">
+      {/* ── Interactive particle network background ── */}
+      <ParticleBackground />
+
       <div className="portfolio-layout">
 
         {/* ── LEFT SIDEBAR ─────────────────────────────────── */}

@@ -129,6 +129,8 @@ button { font-family: 'Poppins', sans-serif; }
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
+  z-index: 1;
 }
 
 
