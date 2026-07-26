@@ -56,7 +56,7 @@ export const educationTimeline = [
     title: "B.Tech in Computer Science and Engineering",
     institution: "Vishnu Institute of Technology, Bhimavaram",
     period: "2022 - 2026",
-    score: "7.82 / 10",
+    score: "8.00 / 10",
     description:
       "Building a strong foundation in AI, ML, and full-stack development through academic projects and research-driven coursework."
   },
