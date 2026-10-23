@@ -223,13 +223,13 @@ export const codingProfiles = [
     icon: "https://leetcode.com/static/images/LeetCode_logo_rvs.png",
     link: "https://leetcode.com/u/SqePPgOvxd/",
     stats: [
-      { label: "Easy", value: "75" },
-      { label: "Medium", value: "65" },
-      { label: "Hard", value: "20" },
-      { label: "Total Solved", value: "160" },
-      { label: "Contest Rating", value: "1,416" },
-      { label: "Global Rank", value: "657,555" },
-      { label: "Top %", value: "75.57%" }
+      { label: "Easy", value: "90" },
+      { label: "Medium", value: "97" },
+      { label: "Hard", value: "22" },
+      { label: "Total Solved", value: "209" },
+      { label: "Contest Rating", value: "1,459" },
+      { label: "Global Rank", value: "520,436" },
+      { label: "Top %", value: "58.95%" }
     ],
     rating: 4
   },
